@@ -77,6 +77,16 @@ for key,val in sorted(count_date.items(),key=lambda x:x[1]):
 dates_France = sorted(filtered_data.lookup("France"))
 print(f"Nb dates for France : {len(dates_France)}, latest date = {dates_France[-1]}")
 
+# Visualize dates per country GROUPBYKEY
+countries_and_dates = filtered_data.map(lambda x: (x[0],x[1]))
+show_first_data(countries_and_dates.groupByKey())
+show_first_data(countries_and_dates.groupByKey().mapValues(list))
+show_first_data(countries_and_dates.groupByKey().mapValues(sorted))
+show_first_data(countries_and_dates.groupByKey().mapValues(set))
+
+# Visualize countries per date GROUPBY
+show_first_data(countries_and_dates.groupBy(lambda x:x[1]).mapValues(list))
+
 # Add a counter to the keys MAP
 counting_datas = filtered_data.map(lambda x: (x[0],1))
 show_nfirst_datas(counting_datas)
